@@ -1,6 +1,8 @@
 # MiniProyecto4
 Miguel Angel Sanclemente Mejia - 202459488
 
+**porfa revisar el correo de miguel.sanclemente@correounivalle.edu.co**
+
 ## Explicación de las estructuras y funcionalidades que utilicé
 
 ### **Excepciones personalizadas**
