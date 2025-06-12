@@ -19,6 +19,12 @@ public class Entrenador {
         Collections.shuffle(availablePokemons);
         for (int i = 0; i < equipo.length; i++) {
             equipo[i] = availablePokemons.remove(0);
+            Ataque[] ataques = equipo[i].getAtaque();
+            for (int j = 0; j < ataques.length; j++) {
+                if (ataques[j] == null) {
+                    System.out.println("ADVERTENCIA: " + equipo[i].getNamePokemon() + " tiene ataque null en la posición " + j);
+                }
+            }
         }
     }
 
@@ -52,21 +58,31 @@ public class Entrenador {
             int idx = 0;
             while ((linea = reader.readLine()) != null && idx < equipo.length) {
                 String[] partes = linea.split(",");
+                if (partes.length < 3) continue; // Línea mal formada, saltar
+
                 String nombrePokemon = partes[0];
                 short hp = Short.parseShort(partes[1]);
                 Pokemon.TipoPokemon tipo = Pokemon.TipoPokemon.valueOf(partes[2]);
                 Ataque[] ataques = new Ataque[4];
+
                 for (int i = 0; i < 4; i++) {
                     String nombreAtaque = (partes.length > 3 + i) ? partes[3 + i] : "null";
                     if (!"null".equals(nombreAtaque)) {
                         Pokemon ref = ElementPokemon.getPokedex().buscarPorNombre(nombrePokemon);
                         if (ref != null) {
+                            boolean encontrado = false;
                             for (Ataque a : ref.getAtaque()) {
-                                if (a.getNameAtaque().equals(nombreAtaque)) {
+                                if (a != null && a.getNameAtaque().equals(nombreAtaque)) {
                                     ataques[i] = a;
+                                    encontrado = true;
                                     break;
                                 }
                             }
+                            if (!encontrado) {
+                                System.out.println("ADVERTENCIA: Ataque '" + nombreAtaque + "' no encontrado para " + nombrePokemon);
+                            }
+                        } else {
+                            System.out.println("ADVERTENCIA: Pokémon '" + nombrePokemon + "' no encontrado en la pokedex.");
                         }
                     }
                 }

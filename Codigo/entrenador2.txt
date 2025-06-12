@@ -1,4 +1,4 @@
-Miguel
-Blastoise,201,AGUA,null,null,null,null
-Pikachu,176,ELECTRICO,null,null,null,null
-Flareon,198,FUEGO,null,null,null,null
+Sanclemente
+Venasaur,-17,PLANTA,Rayo Solar,Hoja Afilada,Latigazo,Bomba Germen
+Vaporeon,-60,AGUA,Surfer,Acua poket,Pistola Agua,Acua lluvia
+Pikachu,176,ELECTRICO,inpactrueno,Puño Trueno,Rayo,Truenete

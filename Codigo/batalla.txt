@@ -1,3 +1,13 @@
-0,0
-Leafeon usa Drenadoras y ataca primero.
-Blastoise usa Surfer.
+1,2
+Zapdos usa Truenete y ataca primero.
+Venasaur usa Rayo Solar.
+Zapdos usa Truenete y ataca primero.
+Venasaur usa Hoja Afilada.
+Zapdos usa Puño Trueno y ataca primero.
+Venasaur usa Hoja Afilada.
+Zapdos usa Puño Trueno y ataca primero.
+Zapdos usa Truenete y ataca primero.
+Vaporeon usa Acua poket.
+Leafeon usa Bomba Germen y ataca primero.
+Vaporeon usa Pistola Agua.
+Leafeon usa Hoja Afilada y ataca primero.
