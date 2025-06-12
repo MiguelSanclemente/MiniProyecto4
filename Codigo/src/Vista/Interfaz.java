@@ -32,6 +32,16 @@ public class Interfaz extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
+        // Guardar partida al cerrar la ventana
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                if (controlador != null) {
+                    controlador.guardarPartida();
+                }
+            }
+        });
+
         // Configuración inicial de la interfaz
         mostrarPantallaInicial();
     }
