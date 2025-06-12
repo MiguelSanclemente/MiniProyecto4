@@ -2,12 +2,14 @@ package Controlador;
 
 import Modelo.*;
 import Vista.Interfaz;
+import java.util.ArrayList;
 
 public class Controlador {
     private Interfaz vista;
     private Entrenador entrenador1;
     private Entrenador entrenador2;
     private int indice1 = 0, indice2 = 0;
+    private Batalla batalla;
 
     public Controlador(Interfaz vista) {
         this.vista = vista;
@@ -23,8 +25,8 @@ public class Controlador {
 
     // Método para iniciar la batalla (puedes expandirlo según tu lógica)
     public void iniciarBatalla() {
+        this.batalla = new Batalla();
         vista.iniciarBatalla();
-     
     }
 
     // Recibe los nombres de los ataques seleccionados
@@ -53,6 +55,8 @@ public class Controlador {
         segundo.setHP((short) (segundo.getHP() - dañoPrimero));
         vista.mostrarMensaje(primero.getNamePokemon() + " usa " + ataquePrimero.getNameAtaque() + " y ataca primero.");
 
+        batalla.getHistorialMovimientos().push(primero.getNamePokemon() + " usa " + ataquePrimero.getNameAtaque() + " y ataca primero.");
+
         if (segundo.getHP() <= 0) {
             vista.mostrarMensaje(segundo.getNamePokemon() + " ha sido derrotado.");
             avanzarAlSiguientePokemon(segundo);
@@ -68,6 +72,8 @@ public class Controlador {
         primero.setHP((short) (primero.getHP() - dañoSegundo));
         vista.mostrarMensaje(segundo.getNamePokemon() + " usa " + ataqueSegundo.getNameAtaque() + ".");
 
+        batalla.getHistorialMovimientos().push(segundo.getNamePokemon() + " usa " + ataqueSegundo.getNameAtaque() + ".");
+
         if (primero.getHP() <= 0) {
             vista.mostrarMensaje(primero.getNamePokemon() + " ha sido derrotado.");
             avanzarAlSiguientePokemon(primero);
@@ -77,6 +83,8 @@ public class Controlador {
                 segundo.getNamePokemon() + " tiene " + segundo.getHP() + " HP restantes."
             );
         }
+        // Suponiendo que tienes acceso a la pila en Batalla:
+        vista.mostrarHistorialMovimientos(new ArrayList<>(batalla.getHistorialMovimientos()));
     }
 
     private Ataque buscarAtaquePorNombre(Pokemon pokemon, String nombreAtaque) {

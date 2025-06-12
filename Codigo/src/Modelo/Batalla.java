@@ -111,6 +111,9 @@ public class Batalla {
         ordenTurnos.clear();
         ordenTurnos.addAll(pokemones);
     }
+    public Stack<String> getHistorialMovimientos() {
+        return historialMovimientos;
+    }
 }
 
 

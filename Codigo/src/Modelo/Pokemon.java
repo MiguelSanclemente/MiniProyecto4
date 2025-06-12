@@ -1,9 +1,6 @@
 package Modelo;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-
 public class Pokemon {
     private String namePokemon;
     private short hp;
@@ -16,9 +13,7 @@ public class Pokemon {
     private int defensaEspecial;
     private int velocidad;
 
-    private HashMap<String, Pokemon> pokemonesPorNombre = new HashMap<>();
-    private HashMap<String, List<Pokemon>> pokemonesPorTipo = new HashMap<>();
-
+  
     public enum TipoAtaque {
         FISICO, ESPACIAL;
     }
