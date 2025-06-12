@@ -238,6 +238,15 @@ public class Interfaz extends JFrame {
         continuarButton.addActionListener(e -> notificarTurnoSeleccionado());
         add(continuarButton, BorderLayout.SOUTH);
 
+        //  Agrega el historial al panel 
+        if (historialArea == null) {
+            historialArea = new JTextArea();
+            historialArea.setEditable(false);
+        }
+        JScrollPane scrollHistorial = new JScrollPane(historialArea);
+        scrollHistorial.setPreferredSize(new Dimension(250, 0));
+        add(scrollHistorial, BorderLayout.EAST);
+
         revalidate();
         repaint();
     }
@@ -307,11 +316,27 @@ public class Interfaz extends JFrame {
     }
 
     public void finalizarBatalla(String ganador) {
-        JOptionPane.showMessageDialog(this, "¡" + ganador + " ha ganado la batalla!");
-        if (controlador != null) {
-            controlador.guardarPartida();
-        }
-        System.exit(0);
+        // Limpiar la ventana
+        getContentPane().removeAll();
+        setLayout(new BorderLayout());
+
+        JLabel mensaje = new JLabel("¡" + ganador + " ha ganado la batalla!", SwingConstants.CENTER);
+        mensaje.setFont(new Font("Arial", Font.BOLD, 24));
+        add(mensaje, BorderLayout.CENTER);
+
+        JButton volverInicio = new JButton("Volver al inicio");
+        volverInicio.addActionListener(e -> {
+            if (controlador != null) {
+                controlador.borrarArchivosGuardado();
+            }
+            mostrarPantallaInicial();
+        });
+        JPanel panelBoton = new JPanel();
+        panelBoton.add(volverInicio);
+        add(panelBoton, BorderLayout.SOUTH);
+
+        revalidate();
+        repaint();
     }
 
     public void setControlador(Controlador controlador) {
@@ -327,17 +352,13 @@ public class Interfaz extends JFrame {
         if (historialArea == null) {
             historialArea = new JTextArea();
             historialArea.setEditable(false);
-            JScrollPane scrollHistorial = new JScrollPane(historialArea);
-            scrollHistorial.setPreferredSize(new Dimension(250, 0));
-            add(scrollHistorial, BorderLayout.EAST);
         }
         historialArea.setText("");
         // Mostrar del más reciente al más antiguo
         for (int i = historial.size() - 1; i >= 0; i--) {
             historialArea.append(historial.get(i) + "\n");
         }
-        revalidate();
-        repaint();
+        historialArea.setCaretPosition(historialArea.getDocument().getLength());
     }
 
 }

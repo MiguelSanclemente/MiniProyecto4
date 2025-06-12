@@ -1,13 +1,29 @@
-1,2
+2,3
+Zapdos usa Rayo y ataca primero.
+Vaporeon usa Surfer.
 Zapdos usa Truenete y ataca primero.
-Venasaur usa Rayo Solar.
-Zapdos usa Truenete y ataca primero.
-Venasaur usa Hoja Afilada.
-Zapdos usa Puño Trueno y ataca primero.
-Venasaur usa Hoja Afilada.
-Zapdos usa Puño Trueno y ataca primero.
-Zapdos usa Truenete y ataca primero.
-Vaporeon usa Acua poket.
-Leafeon usa Bomba Germen y ataca primero.
-Vaporeon usa Pistola Agua.
-Leafeon usa Hoja Afilada y ataca primero.
+Vaporeon usa Surfer.
+Zapdos usa Rayo y ataca primero.
+ss: Vaporeon ha sido derrotado.
+ss envía a Flareon al combate.
+Zapdos usa Rayo y ataca primero.
+Flareon usa Puño Fuego.
+Zapdos usa Rayo y ataca primero.
+Flareon usa Puño Fuego.
+aa: Zapdos ha sido derrotado.
+aa envía a Blastoise al combate.
+Blastoise usa Pistola Agua y ataca primero.
+ss: Flareon ha sido derrotado.
+ss envía a Sandslash al combate.
+Blastoise usa Pistola Agua y ataca primero.
+Sandslash usa Excavar.
+Blastoise usa Pistola Agua y ataca primero.
+Sandslash usa Excavar.
+Blastoise usa Pistola Agua y ataca primero.
+Sandslash usa Bofetón Lodo.
+Blastoise usa Acua poket y ataca primero.
+Sandslash usa Bofetón Lodo.
+aa: Blastoise ha sido derrotado.
+aa envía a Leafeon al combate.
+Leafeon usa Drenadoras y ataca primero.
+ss: Sandslash ha sido derrotado.

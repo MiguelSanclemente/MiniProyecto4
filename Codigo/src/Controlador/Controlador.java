@@ -3,6 +3,10 @@ package Controlador;
 import Modelo.*;
 import Vista.Interfaz;
 import java.util.ArrayList;
+
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.BufferedReader;
@@ -14,6 +18,7 @@ public class Controlador {
     private Entrenador entrenador2;
     private int indice1 = 0, indice2 = 0;
     private Batalla batalla;
+    private JTextArea historialArea; // Agregado aquí
 
     public Controlador(Interfaz vista) {
         this.vista = vista;
@@ -31,6 +36,9 @@ public class Controlador {
     public void iniciarBatalla() {
         this.batalla = new Batalla();
         vista.iniciarBatalla();
+        // Mostrar historial vacío o con mensaje inicial
+        vista.mostrarHistorialMovimientos(new ArrayList<>(batalla.getHistorialMovimientos()));
+        
     }
 
     // Recibe los nombres de los ataques seleccionados
@@ -101,18 +109,37 @@ public class Controlador {
     }
 
     private void avanzarAlSiguientePokemon(Pokemon pokemonDerrotado) {
+        String entrenadorDerrotado = (pokemonDerrotado == entrenador1.getEquipo()[indice1]) ? entrenador1.getNombre() : entrenador2.getNombre();
+
+        // Registrar en el historial que el Pokémon fue derrotado
+        batalla.getHistorialMovimientos().push(
+            entrenadorDerrotado + ": " + pokemonDerrotado.getNamePokemon() + " ha sido derrotado."
+        );
+
         if (pokemonDerrotado == entrenador1.getEquipo()[indice1]) {
             indice1++;
+            // Si hay otro Pokémon, registrar que entra uno nuevo
+            if (indice1 < entrenador1.getEquipo().length && entrenador1.getEquipo()[indice1] != null) {
+                batalla.getHistorialMovimientos().push(
+                    entrenador1.getNombre() + " envía a " + entrenador1.getEquipo()[indice1].getNamePokemon() + " al combate."
+                );
+            }
         } else {
             indice2++;
+            if (indice2 < entrenador2.getEquipo().length && entrenador2.getEquipo()[indice2] != null) {
+                batalla.getHistorialMovimientos().push(
+                    entrenador2.getNombre() + " envía a " + entrenador2.getEquipo()[indice2].getNamePokemon() + " al combate."
+                );
+            }
         }
+
+        vista.mostrarHistorialMovimientos(new ArrayList<>(batalla.getHistorialMovimientos()));
 
         if (indice1 >= entrenador1.getEquipo().length || entrenador1.getEquipo()[indice1] == null ||
             indice2 >= entrenador2.getEquipo().length || entrenador2.getEquipo()[indice2] == null) {
             String ganador = (indice1 >= entrenador1.getEquipo().length) ? entrenador2.getNombre() : entrenador1.getNombre();
             vista.finalizarBatalla(ganador);
         } else {
-            // Reinicia la batalla con los nuevos Pokémon activos
             vista.iniciarBatalla();
         }
     }
@@ -178,6 +205,16 @@ public class Controlador {
         } catch (Exception e) {
             System.err.println("No se pudo cargar la partida anterior: " + e.getMessage());
             return false;
+        }
+    }
+
+    public void borrarArchivosGuardado() {
+        try {
+            new java.io.File("entrenador1.txt").delete();
+            new java.io.File("entrenador2.txt").delete();
+            new java.io.File("batalla.txt").delete();
+        } catch (Exception e) {
+            System.err.println("Error al borrar archivos de guardado: " + e.getMessage());
         }
     }
 

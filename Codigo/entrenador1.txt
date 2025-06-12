@@ -1,4 +1,4 @@
-Miguel
-Zapdos,-71,ELECTRICO,Relampago,Truenete,Puño Trueno,Rayo
-Leafeon,129,PLANTA,Hoja Afilada,Latigazo,Bomba Germen,Drenadoras
-Nidoking,344,TIERRA,Excavar,Tierra Viva,Bofetón Lodo,Avalancha
+aa
+Zapdos,-46,ELECTRICO,Relampago,Truenete,Puño Trueno,Rayo
+Blastoise,-28,AGUA,Hidrobomba,Surfer,Acua poket,Pistola Agua
+Leafeon,194,PLANTA,Hoja Afilada,Latigazo,Bomba Germen,Drenadoras

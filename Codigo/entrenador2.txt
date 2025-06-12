@@ -1,4 +1,4 @@
-Sanclemente
-Venasaur,-17,PLANTA,Rayo Solar,Hoja Afilada,Latigazo,Bomba Germen
-Vaporeon,-60,AGUA,Surfer,Acua poket,Pistola Agua,Acua lluvia
-Pikachu,176,ELECTRICO,inpactrueno,Puño Trueno,Rayo,Truenete
+ss
+Vaporeon,-63,AGUA,Surfer,Acua poket,Pistola Agua,Acua lluvia
+Flareon,-48,FUEGO,Llamarada,Puño Fuego,Giro Fuego,Nitrocarga
+Sandslash,-42,TIERRA,Terremoto,Excavar,Tierra Viva,Bofetón Lodo
