@@ -1,0 +1,4 @@
+soft
+Leafeon,109,PLANTA,null,null,null,null
+Zapdos,274,ELECTRICO,null,null,null,null
+Nidoking,344,TIERRA,null,null,null,null

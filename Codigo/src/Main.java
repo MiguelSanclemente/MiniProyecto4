@@ -7,7 +7,8 @@ public class Main {
             Interfaz interfaz = new Interfaz();
             Controlador controlador = new Controlador(interfaz);
             interfaz.setControlador(controlador);
-            controlador.cargarPartida();
+
+            interfaz.mostrarPantallaInicial();
             interfaz.setVisible(true);
         });
     }

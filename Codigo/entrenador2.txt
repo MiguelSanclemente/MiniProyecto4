@@ -1,0 +1,4 @@
+Miguel
+Blastoise,201,AGUA,null,null,null,null
+Pikachu,176,ELECTRICO,null,null,null,null
+Flareon,198,FUEGO,null,null,null,null

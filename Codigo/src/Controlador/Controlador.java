@@ -118,10 +118,10 @@ public class Controlador {
     }
 
     public void guardarPartida() {
+        System.out.println("DEBUG: Se llamó a guardarPartida()");
         try {
             if (entrenador1 != null) entrenador1.guardarEstado("entrenador1.txt");
             if (entrenador2 != null) entrenador2.guardarEstado("entrenador2.txt");
-            // Guardar índices y el historial de la batalla
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("batalla.txt"))) {
                 writer.write(indice1 + "," + indice2);
                 writer.newLine();
@@ -137,15 +137,21 @@ public class Controlador {
         }
     }
 
-    public void cargarPartida() {
+    public boolean cargarPartida() {
         try {
+            java.io.File f1 = new java.io.File("entrenador1.txt");
+            java.io.File f2 = new java.io.File("entrenador2.txt");
+            java.io.File f3 = new java.io.File("batalla.txt");
+            if (f1.length() == 0 || f2.length() == 0 || f3.length() == 0) {
+                return false; // Archivos vacíos, no cargar
+            }
+
             Entrenador e1 = new Entrenador();
             Entrenador e2 = new Entrenador();
             e1.cargarEstado("entrenador1.txt");
             e2.cargarEstado("entrenador2.txt");
             setEntrenadores(e1, e2);
 
-            // Cargar índices y el historial de la batalla
             batalla = new Batalla();
             try (BufferedReader reader = new BufferedReader(new FileReader("batalla.txt"))) {
                 String linea = reader.readLine();
@@ -159,8 +165,19 @@ public class Controlador {
                     batalla.getHistorialMovimientos().push(mov);
                 }
             }
+            // Avanza si el Pokémon activo está debilitado
+            while (indice1 < entrenador1.getEquipo().length && entrenador1.getEquipo()[indice1].getHP() <= 0) {
+                indice1++;
+            }
+            while (indice2 < entrenador2.getEquipo().length && entrenador2.getEquipo()[indice2].getHP() <= 0) {
+                indice2++;
+            }
+            vista.iniciarBatalla();
+            vista.mostrarHistorialMovimientos(new ArrayList<>(batalla.getHistorialMovimientos()));
+            return true;
         } catch (Exception e) {
             System.err.println("No se pudo cargar la partida anterior: " + e.getMessage());
+            return false;
         }
     }
 

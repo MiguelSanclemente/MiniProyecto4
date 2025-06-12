@@ -31,8 +31,13 @@ public class Entrenador {
             writer.newLine();
             for (Pokemon p : equipo) {
                 writer.write(p.getNamePokemon() + "," + p.getHP() + "," + p.getTypePokemon());
-                for (Ataque a : p.getAtaque()) {
-                    writer.write("," + a.getNameAtaque());
+                Ataque[] ataques = p.getAtaque();
+                for (int i = 0; i < 4; i++) {
+                    if (ataques != null && ataques.length > i && ataques[i] != null) {
+                        writer.write("," + ataques[i].getNameAtaque());
+                    } else {
+                        writer.write(",null");
+                    }
                 }
                 writer.newLine();
             }
@@ -52,19 +57,24 @@ public class Entrenador {
                 Pokemon.TipoPokemon tipo = Pokemon.TipoPokemon.valueOf(partes[2]);
                 Ataque[] ataques = new Ataque[4];
                 for (int i = 0; i < 4; i++) {
-                    String nombreAtaque = partes[3 + i];
-                    // Busca el ataque en la pokedex global
-                    Pokemon ref = ElementPokemon.getPokedex().buscarPorNombre(nombrePokemon);
-                    if (ref != null) {
-                        for (Ataque a : ref.getAtaque()) {
-                            if (a.getNameAtaque().equals(nombreAtaque)) {
-                                ataques[i] = a;
-                                break;
+                    String nombreAtaque = (partes.length > 3 + i) ? partes[3 + i] : "null";
+                    if (!"null".equals(nombreAtaque)) {
+                        Pokemon ref = ElementPokemon.getPokedex().buscarPorNombre(nombrePokemon);
+                        if (ref != null) {
+                            for (Ataque a : ref.getAtaque()) {
+                                if (a.getNameAtaque().equals(nombreAtaque)) {
+                                    ataques[i] = a;
+                                    break;
+                                }
                             }
                         }
                     }
                 }
-                equipo[idx++] = new Pokemon(nombrePokemon, hp, tipo, ataques, 0, 0, 0, 0, 0); // Puedes mejorar stats si lo deseas
+                equipo[idx++] = new Pokemon(nombrePokemon, hp, tipo, ataques, 0, 0, 0, 0, 0);
+            }
+            // Rellenar con Pokémon vacíos si faltan
+            while (idx < equipo.length) {
+                equipo[idx++] = new Pokemon("VACIO", (short)0, Pokemon.TipoPokemon.AGUA, new Ataque[4], 0, 0, 0, 0, 0);
             }
         }
     }
