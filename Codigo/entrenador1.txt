@@ -1,4 +1,0 @@
-aa
-Zapdos,-46,ELECTRICO,Relampago,Truenete,Puño Trueno,Rayo
-Blastoise,-28,AGUA,Hidrobomba,Surfer,Acua poket,Pistola Agua
-Leafeon,194,PLANTA,Hoja Afilada,Latigazo,Bomba Germen,Drenadoras
