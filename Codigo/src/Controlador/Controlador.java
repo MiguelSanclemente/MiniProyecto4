@@ -3,6 +3,10 @@ package Controlador;
 import Modelo.*;
 import Vista.Interfaz;
 import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class Controlador {
     private Interfaz vista;
@@ -110,6 +114,70 @@ public class Controlador {
         } else {
             // Reinicia la batalla con los nuevos Pokémon activos
             vista.iniciarBatalla();
+        }
+    }
+
+    public void guardarPartida() {
+        System.out.println("DEBUG: Se llamó a guardarPartida()");
+        try {
+            if (entrenador1 != null) entrenador1.guardarEstado("entrenador1.txt");
+            if (entrenador2 != null) entrenador2.guardarEstado("entrenador2.txt");
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("batalla.txt"))) {
+                writer.write(indice1 + "," + indice2);
+                writer.newLine();
+                if (batalla != null) {
+                    for (String mov : batalla.getHistorialMovimientos()) {
+                        writer.write(mov);
+                        writer.newLine();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error al guardar la partida: " + e.getMessage());
+        }
+    }
+
+    public boolean cargarPartida() {
+        try {
+            java.io.File f1 = new java.io.File("entrenador1.txt");
+            java.io.File f2 = new java.io.File("entrenador2.txt");
+            java.io.File f3 = new java.io.File("batalla.txt");
+            if (f1.length() == 0 || f2.length() == 0 || f3.length() == 0) {
+                return false; // Archivos vacíos, no cargar
+            }
+
+            Entrenador e1 = new Entrenador();
+            Entrenador e2 = new Entrenador();
+            e1.cargarEstado("entrenador1.txt");
+            e2.cargarEstado("entrenador2.txt");
+            setEntrenadores(e1, e2);
+
+            batalla = new Batalla();
+            try (BufferedReader reader = new BufferedReader(new FileReader("batalla.txt"))) {
+                String linea = reader.readLine();
+                if (linea != null) {
+                    String[] indices = linea.split(",");
+                    indice1 = Integer.parseInt(indices[0]);
+                    indice2 = Integer.parseInt(indices[1]);
+                }
+                String mov;
+                while ((mov = reader.readLine()) != null) {
+                    batalla.getHistorialMovimientos().push(mov);
+                }
+            }
+            // Avanza si el Pokémon activo está debilitado
+            while (indice1 < entrenador1.getEquipo().length && entrenador1.getEquipo()[indice1].getHP() <= 0) {
+                indice1++;
+            }
+            while (indice2 < entrenador2.getEquipo().length && entrenador2.getEquipo()[indice2].getHP() <= 0) {
+                indice2++;
+            }
+            vista.iniciarBatalla();
+            vista.mostrarHistorialMovimientos(new ArrayList<>(batalla.getHistorialMovimientos()));
+            return true;
+        } catch (Exception e) {
+            System.err.println("No se pudo cargar la partida anterior: " + e.getMessage());
+            return false;
         }
     }
 

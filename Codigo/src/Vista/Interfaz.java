@@ -32,11 +32,19 @@ public class Interfaz extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
-        // Configuración inicial de la interfaz
-        mostrarPantallaInicial();
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                if (controlador != null) {
+                    controlador.guardarPartida();
+                }
+            }
+        });
     }
 
-    private void mostrarPantallaInicial() {
+
+    public void mostrarPantallaInicial() {
+        // Limpiar el contenido de la ventana
         getContentPane().removeAll();
         setLayout(new BorderLayout());
     
@@ -75,11 +83,22 @@ public class Interfaz extends JFrame {
         // Botón Aceptar en panel separado centrado
         JButton aceptarButton = new JButton("Aceptar");
         aceptarButton.setPreferredSize(new Dimension(100, 30));
+        aceptarButton.addActionListener(e -> generarEquipos(true));
+    
+        JButton cargarButton = new JButton("Cargar partida existente");
+        cargarButton.setPreferredSize(new Dimension(180, 30));
+        cargarButton.addActionListener(e -> {
+            if (controlador != null) {
+                boolean cargada = controlador.cargarPartida();
+                if (!cargada) {
+                    JOptionPane.showMessageDialog(this, "No hay partida guardada válida.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     
         JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelBoton.add(aceptarButton);
-    
-        aceptarButton.addActionListener(e -> generarEquipos());
+        panelBoton.add(cargarButton);
     
         add(panelBoton, BorderLayout.SOUTH);
     
@@ -88,7 +107,7 @@ public class Interfaz extends JFrame {
     }
     
 
-    private void generarEquipos() {
+    private void generarEquipos(boolean esNuevaPartida) {
         // Obtener los nombres de los entrenadores
         String nombreEntrenador1 = entrenador1Field.getText().trim();
         String nombreEntrenador2 = entrenador2Field.getText().trim();
@@ -98,8 +117,10 @@ public class Interfaz extends JFrame {
             return;
         }
 
-        // Inicializar datos y generar equipos
-        ElementPokemon.initializeData();
+        // Solo inicializar datos si es una nueva partida
+        if (esNuevaPartida) {
+            ElementPokemon.initializeData();
+        }
         List<Pokemon> availablePokemons = new ArrayList<>(Arrays.asList(ElementPokemon.getPokemon()));
 
         Entrenador entrenador1 = new Entrenador();
@@ -108,6 +129,7 @@ public class Interfaz extends JFrame {
         entrenador2.setNameTrainer(new Scanner(nombreEntrenador2), availablePokemons);
 
         if (controlador != null) {
+        
             controlador.setEntrenadores(entrenador1, entrenador2);
         }
 
@@ -177,12 +199,26 @@ public class Interfaz extends JFrame {
         int idx1 = controlador.getIndice1();
         int idx2 = controlador.getIndice2();
 
-        // Validar índices y existencia de Pokémon antes de mostrar paneles
         Pokemon pokemon1 = (idx1 < entrenador1.getEquipo().length) ? entrenador1.getEquipo()[idx1] : null;
         Pokemon pokemon2 = (idx2 < entrenador2.getEquipo().length) ? entrenador2.getEquipo()[idx2] : null;
 
+        // Si ambos Pokémon son null, la batalla terminó
+        if (pokemon1 == null && pokemon2 == null) {
+            JLabel fin = new JLabel("La batalla ha terminado.", SwingConstants.CENTER);
+            fin.setFont(new Font("Arial", Font.BOLD, 22));
+            add(fin, BorderLayout.CENTER);
+            revalidate();
+            repaint();
+            return;
+        }
+
+        // Si alguno es null, muestra el que queda y un mensaje
         if (pokemon1 == null || pokemon2 == null) {
-            // No mostrar paneles, la batalla terminó o hay un error
+            JLabel fin = new JLabel("La batalla ha terminado. Hay un ganador.", SwingConstants.CENTER);
+            fin.setFont(new Font("Arial", Font.BOLD, 22));
+            add(fin, BorderLayout.CENTER);
+            revalidate();
+            repaint();
             return;
         }
 
@@ -198,7 +234,7 @@ public class Interfaz extends JFrame {
         add(panelCentral, BorderLayout.CENTER);
 
         continuarButton = new JButton("Continuar");
-        continuarButton.setEnabled(false); // Deshabilitado hasta que ambos seleccionen habilidades
+        continuarButton.setEnabled(false);
         continuarButton.addActionListener(e -> notificarTurnoSeleccionado());
         add(continuarButton, BorderLayout.SOUTH);
 
@@ -272,6 +308,9 @@ public class Interfaz extends JFrame {
 
     public void finalizarBatalla(String ganador) {
         JOptionPane.showMessageDialog(this, "¡" + ganador + " ha ganado la batalla!");
+        if (controlador != null) {
+            controlador.guardarPartida();
+        }
         System.exit(0);
     }
 
