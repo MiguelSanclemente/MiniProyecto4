@@ -113,6 +113,28 @@ public class Controlador {
         }
     }
 
+    public void guardarPartida() {
+        try {
+            if (entrenador1 != null) entrenador1.guardarEstado("entrenador1.txt");
+            if (entrenador2 != null) entrenador2.guardarEstado("entrenador2.txt");
+            // Puedes guardar más información si lo deseas (índices, historial, etc)
+        } catch (Exception e) {
+            System.err.println("Error al guardar la partida: " + e.getMessage());
+        }
+    }
+
+    public void cargarPartida() {
+        try {
+            Entrenador e1 = new Entrenador();
+            Entrenador e2 = new Entrenador();
+            e1.cargarEstado("entrenador1.txt");
+            e2.cargarEstado("entrenador2.txt");
+            setEntrenadores(e1, e2);
+        } catch (Exception e) {
+            System.err.println("No se pudo cargar la partida anterior: " + e.getMessage());
+        }
+    }
+
     public Entrenador getEntrenador1() {
         return entrenador1;
     }
