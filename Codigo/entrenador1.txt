@@ -1,4 +1,4 @@
-Miguel
-Zapdos,-71,ELECTRICO,Relampago,Truenete,Puño Trueno,Rayo
-Leafeon,129,PLANTA,Hoja Afilada,Latigazo,Bomba Germen,Drenadoras
-Nidoking,344,TIERRA,Excavar,Tierra Viva,Bofetón Lodo,Avalancha
+miguel
+Flareon,-48,FUEGO,Llamarada,Puño Fuego,Giro Fuego,Nitrocarga
+Venasaur,-64,PLANTA,Rayo Solar,Hoja Afilada,Latigazo,Bomba Germen
+Pikachu,-57,ELECTRICO,inpactrueno,Puño Trueno,Rayo,Truenete

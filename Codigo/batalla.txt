@@ -1,13 +1,27 @@
-1,2
-Zapdos usa Truenete y ataca primero.
-Venasaur usa Rayo Solar.
-Zapdos usa Truenete y ataca primero.
-Venasaur usa Hoja Afilada.
-Zapdos usa Puño Trueno y ataca primero.
-Venasaur usa Hoja Afilada.
-Zapdos usa Puño Trueno y ataca primero.
-Zapdos usa Truenete y ataca primero.
+3,2
+Blastoise usa Hidrobomba y ataca primero.
+Flareon usa Nitrocarga.
+Blastoise usa Hidrobomba y ataca primero.
+miguel: Flareon ha sido derrotado.
+miguel envía a Venasaur al combate.
+Venasaur usa Bomba Germen y ataca primero.
+Blastoise usa Surfer.
+Venasaur usa Bomba Germen y ataca primero.
+Blastoise usa Surfer.
+Venasaur usa Bomba Germen y ataca primero.
+angel: Blastoise ha sido derrotado.
+angel envía a Vaporeon al combate.
+Venasaur usa Bomba Germen y ataca primero.
 Vaporeon usa Acua poket.
-Leafeon usa Bomba Germen y ataca primero.
-Vaporeon usa Pistola Agua.
-Leafeon usa Hoja Afilada y ataca primero.
+Venasaur usa Bomba Germen y ataca primero.
+Vaporeon usa Surfer.
+miguel: Venasaur ha sido derrotado.
+miguel envía a Pikachu al combate.
+Pikachu usa Truenete y ataca primero.
+angel: Vaporeon ha sido derrotado.
+angel envía a Sandslash al combate.
+Pikachu usa Truenete y ataca primero.
+Sandslash usa Terremoto.
+Pikachu usa Truenete y ataca primero.
+Sandslash usa Excavar.
+miguel: Pikachu ha sido derrotado.
