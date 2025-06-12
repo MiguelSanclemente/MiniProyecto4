@@ -1,9 +1,13 @@
 package Modelo;
 import java.util.Scanner;
-import javax.swing.JButton;
+import java.util.Stack;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class Batalla {
+    private Stack<String> historialMovimientos = new Stack<>();
+    private LinkedList<Pokemon> ordenTurnos = new LinkedList<>();
 
     public void iniciarBatalla(String nombreEntrenador1, Pokemon[] equipo1, String nombreEntrenador2, Pokemon[] equipo2, Scanner sc) {
         // Se Muestras los equipos de los respectivos entrenadores
@@ -95,6 +99,17 @@ public class Batalla {
         for (Pokemon p : equipo2) {
             System.out.println("- " + p.getNamePokemon() + " (HP: " + p.getHP() + ", Tipo: " + p.getTypePokemon() + ")");
         }
+    }
+    public void registrarMovimiento(String movimiento) {
+        historialMovimientos.push(movimiento);
+    }
+    public String ultimoMovimiento() {
+        return historialMovimientos.isEmpty() ? null : historialMovimientos.peek();
+    }
+    public void ordenarPorVelocidad(List<Pokemon> pokemones) {
+        pokemones.sort((p1, p2) -> Integer.compare(p2.getVelocidad(), p1.getVelocidad()));
+        ordenTurnos.clear();
+        ordenTurnos.addAll(pokemones);
     }
 }
 
