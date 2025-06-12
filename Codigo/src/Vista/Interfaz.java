@@ -19,6 +19,7 @@ public class Interfaz extends JFrame {
     private JTextField entrenador1Field;
     private JTextField entrenador2Field;
     private JTextArea textArea;
+    private JTextArea historialArea; // Área de texto para el historial de la batalla
 
     private ButtonGroup grupoHabilidades1;
     private ButtonGroup grupoHabilidades2;
@@ -276,6 +277,28 @@ public class Interfaz extends JFrame {
 
     public void setControlador(Controlador controlador) {
         this.controlador = controlador;
+    }
+
+    /**
+     * Muestra el historial de movimientos en un panel lateral.
+     * Llama este método después de cada turno o cuando quieras actualizar el historial.
+     * @param historial Lista de movimientos (puedes pasarle la pila convertida a lista)
+     */
+    public void mostrarHistorialMovimientos(List<String> historial) {
+        if (historialArea == null) {
+            historialArea = new JTextArea();
+            historialArea.setEditable(false);
+            JScrollPane scrollHistorial = new JScrollPane(historialArea);
+            scrollHistorial.setPreferredSize(new Dimension(250, 0));
+            add(scrollHistorial, BorderLayout.EAST);
+        }
+        historialArea.setText("");
+        // Mostrar del más reciente al más antiguo
+        for (int i = historial.size() - 1; i >= 0; i--) {
+            historialArea.append(historial.get(i) + "\n");
+        }
+        revalidate();
+        repaint();
     }
 
 }
