@@ -1,4 +1,4 @@
-miguel
-Flareon,-48,FUEGO,Llamarada,Puño Fuego,Giro Fuego,Nitrocarga
-Venasaur,-64,PLANTA,Rayo Solar,Hoja Afilada,Latigazo,Bomba Germen
-Pikachu,-57,ELECTRICO,inpactrueno,Puño Trueno,Rayo,Truenete
+aa
+Zapdos,-46,ELECTRICO,Relampago,Truenete,Puño Trueno,Rayo
+Blastoise,-28,AGUA,Hidrobomba,Surfer,Acua poket,Pistola Agua
+Leafeon,194,PLANTA,Hoja Afilada,Latigazo,Bomba Germen,Drenadoras

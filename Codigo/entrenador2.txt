@@ -1,4 +1,4 @@
-angel
-Blastoise,-64,AGUA,Hidrobomba,Surfer,Acua poket,Pistola Agua
-Vaporeon,-47,AGUA,Surfer,Acua poket,Pistola Agua,Acua lluvia
-Sandslash,220,TIERRA,Terremoto,Excavar,Tierra Viva,Bofetón Lodo
+ss
+Vaporeon,-63,AGUA,Surfer,Acua poket,Pistola Agua,Acua lluvia
+Flareon,-48,FUEGO,Llamarada,Puño Fuego,Giro Fuego,Nitrocarga
+Sandslash,-42,TIERRA,Terremoto,Excavar,Tierra Viva,Bofetón Lodo
