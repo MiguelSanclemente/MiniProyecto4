@@ -1,4 +1,0 @@
-ss
-Vaporeon,-63,AGUA,Surfer,Acua poket,Pistola Agua,Acua lluvia
-Flareon,-48,FUEGO,Llamarada,Puño Fuego,Giro Fuego,Nitrocarga
-Sandslash,-42,TIERRA,Terremoto,Excavar,Tierra Viva,Bofetón Lodo
