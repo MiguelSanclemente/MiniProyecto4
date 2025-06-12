@@ -7,6 +7,7 @@ public class Main {
             Interfaz interfaz = new Interfaz();
             Controlador controlador = new Controlador(interfaz);
             interfaz.setControlador(controlador);
+            controlador.cargarPartida();
             interfaz.setVisible(true);
         });
     }
