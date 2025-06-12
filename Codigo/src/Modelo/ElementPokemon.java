@@ -4,6 +4,7 @@ package Modelo;
 public class ElementPokemon {
     private static Ataque[] fireMoves, waterMoves, grassMoves, groundMoves, electricMoves;
     private static Pokemon[] pokemon;
+    private static Pokedex pokedex = new Pokedex();
 
     public static void initializeMoves() {
         fireMoves = new Ataque[] {
@@ -56,6 +57,9 @@ public class ElementPokemon {
             new Pokemon("Pikachu", (short) 176, Pokemon.TipoPokemon.ELECTRICO, new Ataque[] {electricMoves[0], electricMoves[2], electricMoves[1], electricMoves[4]}, 55, 40, 50, 50, 90),
             new Pokemon("Zapdos", (short) 274, Pokemon.TipoPokemon.ELECTRICO, new Ataque[] {electricMoves[3], electricMoves[4], electricMoves[2], electricMoves[1]}, 90, 85, 125, 90, 100)
         };
+        for (Pokemon p : pokemon) {
+            pokedex.agregar(p);
+        }
     }
 
     public static void initializeData() {
@@ -64,6 +68,8 @@ public class ElementPokemon {
     }
 
     public static Pokemon[] getPokemon() { return pokemon; }
+
+    public static Pokedex getPokedex() { return pokedex; }
 
     public static void main(String[] args) {
         ElementPokemon.initializeData();

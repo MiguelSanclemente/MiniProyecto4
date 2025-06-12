@@ -1,6 +1,8 @@
 package Modelo;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 public class Pokemon {
     private String namePokemon;
@@ -13,6 +15,9 @@ public class Pokemon {
     private int ataqueEspecial;
     private int defensaEspecial;
     private int velocidad;
+
+    private HashMap<String, Pokemon> pokemonesPorNombre = new HashMap<>();
+    private HashMap<String, List<Pokemon>> pokemonesPorTipo = new HashMap<>();
 
     public enum TipoAtaque {
         FISICO, ESPACIAL;
@@ -60,4 +65,24 @@ public class Pokemon {
     public int getAtaqueEspecial() { return ataqueEspecial; }
     public int getDefensaEspecial() { return defensaEspecial; }
     public int getVelocidad() { return velocidad; }
+
+    public void usarAtaque(String nombreAtaque) throws PokemonDebilitadoException, AtaqueNoDisponibleException {
+        if (this.hp <= 0) {
+            throw new PokemonDebilitadoException("El Pokémon está debilitado y no puede atacar.");
+        }
+        Ataque ataque = buscarAtaquePorNombre(nombreAtaque);
+        if (ataque == null) {
+            throw new AtaqueNoDisponibleException("El ataque no está disponible para este Pokémon.");
+        }
+        // Lógica para usar el ataque...
+    }
+
+    private Ataque buscarAtaquePorNombre(String nombreAtaque) {
+        for (Ataque a : ataque) {
+            if (a != null && a.getNameAtaque().equals(nombreAtaque)) {
+                return a;
+            }
+        }
+        return null;
+    }
 }
