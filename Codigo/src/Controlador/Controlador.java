@@ -3,6 +3,10 @@ package Controlador;
 import Modelo.*;
 import Vista.Interfaz;
 import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class Controlador {
     private Interfaz vista;
@@ -117,7 +121,17 @@ public class Controlador {
         try {
             if (entrenador1 != null) entrenador1.guardarEstado("entrenador1.txt");
             if (entrenador2 != null) entrenador2.guardarEstado("entrenador2.txt");
-            // Puedes guardar más información si lo deseas (índices, historial, etc)
+            // Guardar índices y el historial de la batalla
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("batalla.txt"))) {
+                writer.write(indice1 + "," + indice2);
+                writer.newLine();
+                if (batalla != null) {
+                    for (String mov : batalla.getHistorialMovimientos()) {
+                        writer.write(mov);
+                        writer.newLine();
+                    }
+                }
+            }
         } catch (Exception e) {
             System.err.println("Error al guardar la partida: " + e.getMessage());
         }
@@ -130,6 +144,21 @@ public class Controlador {
             e1.cargarEstado("entrenador1.txt");
             e2.cargarEstado("entrenador2.txt");
             setEntrenadores(e1, e2);
+
+            // Cargar índices y el historial de la batalla
+            batalla = new Batalla();
+            try (BufferedReader reader = new BufferedReader(new FileReader("batalla.txt"))) {
+                String linea = reader.readLine();
+                if (linea != null) {
+                    String[] indices = linea.split(",");
+                    indice1 = Integer.parseInt(indices[0]);
+                    indice2 = Integer.parseInt(indices[1]);
+                }
+                String mov;
+                while ((mov = reader.readLine()) != null) {
+                    batalla.getHistorialMovimientos().push(mov);
+                }
+            }
         } catch (Exception e) {
             System.err.println("No se pudo cargar la partida anterior: " + e.getMessage());
         }
